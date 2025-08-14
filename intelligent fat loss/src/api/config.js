@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5174/api',
+  baseURL: 'http://localhost:5173/api',
 });
 
 // 请求拦截器

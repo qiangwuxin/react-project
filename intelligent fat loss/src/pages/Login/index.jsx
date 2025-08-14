@@ -11,6 +11,7 @@ import {
   CellGroup,
   Toast as VantToast
 } from 'react-vant';
+import useTitle from '@/hooks/useTitle';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Login = () => {
     return () => {
       isMountedRef.current = false;
     };
+    useTitle('用户登录');
   }, []);
   
   const handleLogin = async () => {
