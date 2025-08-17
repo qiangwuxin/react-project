@@ -1,0 +1,35 @@
+.container {
+  padding-top: 24px;
+  background-color: #f7f8fa;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  width: 1800px;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.container>div:first-child {
+  margin-bottom: 24px;
+}
+
+.search {
+  padding: 16px;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.search input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f5f5f5;
+}
+
+.search input:focus {
+  outline: none;
+  border-color: #1989fa;
+}

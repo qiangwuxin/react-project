@@ -21,11 +21,11 @@ const Login = () => {
   const { login } = useUserStore();
   const isMountedRef = useRef(true);
   
+  useTitle('用户登录');
   useEffect(() => {
     return () => {
       isMountedRef.current = false;
     };
-    useTitle('用户登录');
   }, []);
   
   const handleLogin = async () => {

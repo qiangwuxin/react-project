@@ -1,0 +1,93 @@
+.card {
+  width: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  /* 添加高度100%确保flex布局生效 */
+  height: 100%;
+}
+
+/* 修改图片容器为flex布局 */
+.img-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  /* 关键修改：使用flex-grow占据剩余空间 */
+  flex-grow: 1;
+  /* 添加最小高度限制 */
+  min-height: 100px;
+}
+
+.img-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 内容区域保持固定高度 */
+.content {
+  height: 200px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  /* 禁止内容区域伸缩 */
+  flex-shrink: 0;
+}
+
+/* 以下样式保持不变 */
+.title {
+  font-size: px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 1.3;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price {
+  font-size: 16px;
+  color: #ff5000;
+  font-weight: bold;
+  margin: 2px 0 4px;
+}
+
+.desc {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.Btn {
+  font-size: 13px;
+  padding: 6px 0;
+  border-radius: 18px;
+  background: linear-gradient(to right, #ff9000, #ff5000);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-weight: 500;
+}
+
+.Btn:hover {
+  opacity: 0.9;
+  transform: scale(0.98);
+}

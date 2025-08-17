@@ -1,36 +1,29 @@
-.wrapper>div{
-  position:fixed; /*static*/
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  background:#d44439;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  /* 关键帧动画 */
-  /* annimation-name 动画脚本  animation-duration animation
-  animation-iteration-count 执行次数
-  animation-timing-function:运动速率  ease-in 先慢后快*/
-  animation:loading 1.4s infinite ease-in
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
 }
-.wrapper>div:nth-child(2){
-  animation-delay:-0.7s;
-}
-@keyframes loading{
-/* 1.4s 你设计多少个动作 ？  */
-0%,100%{
- transform:scale(0);
-}
-/* 25%{
- background-color: pink;
-} */
 
-50%{
- transform:scale(1);
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e3e3e3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
 }
-/* 75%{
- background-color: green;
-} */
+
+.loadingText {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

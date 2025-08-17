@@ -1,12 +1,12 @@
-import styles from './loading.module.css';
-import {memo} from 'react';
+import styles from './loading.module.css'
 
-const Loading=()=>{
+const Loading = () => {
   return (
-    <div className={styles.wrapper}>
-          <div></div>
-          <div></div>
+    <div className={styles.loadingContainer}>
+      <div className={styles.spinner}></div>
+      <p className={styles.loadingText}>加載中...</p>
     </div>
   )
 }
-export default memo(Loading);
+
+export default Loading
