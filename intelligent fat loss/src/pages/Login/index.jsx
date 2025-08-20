@@ -1,13 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { useUserStore } from '@/store/userStore';
-import { useNavigate, useLocation } from 'react-router-dom'; // 添加了useLocation
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './login.module.css';
-import { 
-  Field, 
-  Radio, 
-  RadioGroup, 
-  Button, 
-  Form, 
+import {
+  Field,
+  Button,
   CellGroup,
   Toast as VantToast
 } from 'react-vant';
@@ -15,46 +12,48 @@ import useTitle from '@/hooks/useTitle';
 
 const Login = () => {
   const navigate = useNavigate();
-  const location = useLocation(); // 添加useLocation钩子
-  const [form] = Form.useForm();
+  const location = useLocation();
   const [error, setError] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const { login } = useUserStore();
   const isMountedRef = useRef(true);
-  
-  useTitle('用户登录');
+
+  useTitle('用戶登录');
   useEffect(() => {
     return () => {
       isMountedRef.current = false;
     };
   }, []);
-  
+
   const handleLogin = async () => {
     try {
-      // 验证表单
-      await form.validateFields();
-      
-      // 获取表单值
-      const values = form.getFieldsValue();
-      const { username, password, age, height, weight, targetweight, bodyType, sportType } = values;
-      
-      // 调用登录函数
+      console.log('handleLogin called'); // 調試日誌
+      console.log('State values - username:', username, 'password:', password); // 調試日誌
+
+      // 驗證表單
+      if (!username || !password) {
+        setError('請輸入用戶名和密码');
+        return;
+      }
+
+      // 調用登錄函數
       await login({
         username,
-        password,
-        bodyData: {
-          age,
-          height,
-          weight,
-          targetweight,
-          bodyType,
-          sportType
-        }
+        password
       });
-      
+
       if (isMountedRef.current) {
-        // 修复：使用location.state获取重定向路径
+        // 修復：使用location.state獲取重定向路徑
         const from = location.state?.from || '/diet';
-        navigate(from, { replace: true });
+        // 直接導航
+        try {
+          navigate(from, { replace: true });
+        } catch (error) {
+          console.error('登录后导航错误:', error);
+          // 如果導航失敗，使用默認路徑
+          navigate('/diet', { replace: true });
+        }
       }
     } catch (err) {
       if (isMountedRef.current) {
@@ -62,7 +61,7 @@ const Login = () => {
           VantToast.fail('请填写完整信息');
         } else if (err.message) {
           setError('登录失败: ' + err.message);
-          console.error('登录错误:', err);
+          console.error('login error:', err);
         } else {
           setError('登录失败: 用户名或密码错误');
           console.error('登录错误:', err);
@@ -71,193 +70,111 @@ const Login = () => {
     }
   };
 
+  const handleRegister = () => {
+    // 跳轉到註冊頁面或顯示註冊提示
+    VantToast.info('注册功能开发中...');
+  };
+
   return (
-    <>
-    <div className="login-container">
-      <div className="login-left">
-        <div className="logo">
-          <h1>健康管理</h1>
-        </div>
-        <div className="slogan">
-          个性化饮食与运动计划，助您达成健康目标
-        </div>
-        <div className="features">
-          <div className="feature">
-            <div className="icon">🍎</div>
-            <h3>智能饮食规划</h3>
-            <p>根据您的身体数据定制专属饮食方案</p>
-          </div>
-          <div className="feature">
-            <div className="icon">💪</div>
-            <h3>科学运动指导</h3>
-            <p>个性化健身计划，专业动作指导</p>
-          </div>
-          <div className="feature">
-            <div className="icon">📊</div>
-            <h3>数据追踪分析</h3>
-            <p>记录每日摄入，可视化进度报告</p>
-          </div>
-          <div className="feature">
-            <div className="icon">🎯</div>
-            <h3>目标达成系统</h3>
-            <p>设定目标，实时追踪，成就健康生活</p>
-          </div>
-        </div>
+    <div className={styles.container}>
+      {/* 背景圖片 */}
+      <div className={styles.backgroundImage}>
+        <img
+          src="https://img95.699pic.com/photo/60022/4436.jpg_wh860.jpg"
+          alt="背景"
+        />
       </div>
-      
-      <div className="login-right">
-        <div className="login-form">
-          <h2>用户登录</h2>
-          <p className="subtitle">请输入您的个人信息</p>
-          
-          {error && <div className="error-message">{error}</div>}
-          
-          <Form
-            form={form}
-            onFinish={handleLogin}
-            footer={
-              <Button 
-                round 
-                nativeType="submit" 
-                type="primary" 
-                block
-                className="login-btn"
-              >
-                登录
-              </Button>
-            }
-          >
-            <CellGroup inset>
-              <Form.Item
-                name="username"
-                label="用户名"
-                rules={[
-                  { required: true, message: '请输入用户名' },
-                  { min: 3, message: '用户名至少3位' },
-                  { max: 20, message: '用户名最多20位' }
-                ]}
-              >
-                <Field 
-                  placeholder="请输入用户名"
-                  leftIcon="user-o"
-                />
-              </Form.Item>
-              
-              <Form.Item
-                name="password"
-                label="密码"
-                rules={[
-                  { required: true, message: '请输入密码' },
-                  { min: 6, message: '密码至少6位' },
-    
-                ]}
-              >
-                <Field 
-                  type="password"
-                  placeholder="请输入密码"
-                  leftIcon="lock-o"
-                />
-              </Form.Item>
-              
-              <Form.Item
-                name="age"
-                label="年龄"
-                rules={[
-                  { required: true, message: '请输入年龄' },
-                  { pattern: /^(?:[1-9][0-9]?|1[01][0-9]|120)$/, message: '年龄应在1-120之间' }
-                ]}
-              >
-                <Field 
-                  type="number"
-                  placeholder="请输入年龄"
-                  leftIcon="flower-o"
-                />
-              </Form.Item>
-              
-              <Form.Item
-                name="height"
-                label="身高(cm)"
-                rules={[
-                  { required: true, message: '请输入身高' },
-                  { pattern: /^(5[0-9]|1[0-9]{2}|2[0-4][0-9]|250)$/, message: '身高应在50-250之间' }
-                ]}
-              >
-                <Field 
-                  type="number"
-                  placeholder="请输入身高"
-                  leftIcon="column"
-                />
-              </Form.Item>
-              
-              <Form.Item
-                name="weight"
-                label="体重(kg)"
-                rules={[
-                  { required: true, message: '请输入体重' },
-                  { pattern: /^([1-9][0-9]{0,2})(\.[0-9])?$/, message: '请输入有效体重' }
-                ]}
-              >
-                <Field 
-                  type="number"
-                  placeholder="请输入体重"
-                  leftIcon="balance-o"
-                />
-              </Form.Item>
-              
-              <Form.Item
-                name="targetweight"
-                label="目标体重(kg)"
-                rules={[
-                  { required: true, message: '请输入目标体重' },
-                  { pattern: /^([1-9][0-9]{0,2})(\.[0-9])?$/, message: '请输入有效体重' }
-                ]}
-              >
-                <Field 
-                  type="number"
-                  placeholder="请输入目标体重"
-                  leftIcon="aim"
-                />
-              </Form.Item>
-              
-              <Form.Item
-                name="bodyType"
-                label="体型选择"
-                rules={[{ required: true, message: '请选择体型' }]}
-              >
-                <RadioGroup direction="horizontal">
-                  <Radio name="梨形">梨形</Radio>
-                  <Radio name="苹果型">苹果型</Radio>
-                  <Radio name="匀称型">匀称型</Radio>
-                </RadioGroup>
-              </Form.Item>
-              
-              <Form.Item
-                name="sportType"
-                label="运动方式"
-                rules={[{ required: true, message: '请选择运动方式' }]}
-              >
-                <RadioGroup direction="horizontal">
-                  <Radio name="久坐不动">久坐不动</Radio>
-                  <Radio name="有氧运动">有氧运动</Radio>
-                  <Radio name="无氧运动">无氧运动</Radio>
-                  <Radio name="有氧和无氧结合">有氧和无氧结合</Radio>
-                </RadioGroup>
-              </Form.Item>
-            </CellGroup>
-          </Form>
-          
-          <div className="additional-options">
-            <p className="register-link">
-              没有账号？<a onClick={() => navigate('/register')}>立即注册</a>
-            </p>
-            <p className="forgot-password">
-              <a onClick={() => navigate('/reset-password')}>忘记密码？</a>
-            </p>
+
+      {/* 返回按鈕 */}
+      <div className={styles.backButton}>
+        <button onClick={() => navigate(-1)}>
+          ←
+        </button>
+      </div>
+
+      {/* 登錄表單 */}
+      <div className={styles.loginForm}>
+        <div className={styles.formHeader}>
+          <h2>欢迎回来</h2>
+          <p>请登录您的账户</p>
+        </div>
+
+        <div className={styles.form}>
+          <CellGroup>
+            {/* 用戶名輸入 */}
+            <Field
+              value={username}
+              onChange={setUsername}
+              placeholder="用户名或手机号"
+              leftIcon="username"
+            />
+
+            {/* 密碼輸入 */}
+            <Field
+              type="password"
+              value={password}
+              onChange={setPassword}
+              placeholder="密码"
+              leftIcon="lock"
+            />
+          </CellGroup>
+
+          {/* 忘記密碼 */}
+          <div className={styles.forgotPassword}>
+            <a href="#" onClick={(e) => { e.preventDefault(); VantToast.info('忘记密码功能开发中...'); }}>
+              忘记密码?
+            </a>
+          </div>
+
+          {/* 錯誤信息 */}
+          {error && (
+            <div className={styles.errorMessage}>
+              {error}
+            </div>
+          )}
+
+          {/* 登錄按鈕 */}
+          <div className={styles.buttonGroup}>
+            <Button
+              type="primary"
+              size="large"
+              block
+              onClick={handleLogin}
+              className={styles.loginButton}
+            >
+              登录
+            </Button>
+
+            <Button
+              size="large"
+              block
+              onClick={handleRegister}
+              className={styles.registerButton}
+            >
+              注册
+            </Button>
+          </div>
+
+          {/* 其他登錄方式 */}
+          <div className={styles.otherLogin}>
+            <div className={styles.divider}>
+              <span>其他快捷方式登录</span>
+            </div>
+            <div className={styles.socialButtons}>
+              <button className={styles.socialButton} style={{ borderColor: '#07C160' }}>
+                <span>微信</span>
+              </button>
+              <button className={styles.socialButton} style={{ borderColor: '#1890FF' }}>
+                <span>QQ</span>
+              </button>
+              <button className={styles.socialButton} style={{ borderColor: '#E6162D' }}>
+                <span>微博</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    </>
   );
 };
 
