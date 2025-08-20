@@ -63,12 +63,12 @@
 
 .swiperContainer {
   width: 100%;
-  height: 85vh;
-  /* 增加到視窗高度的 85% */
-  max-height: 900px;
-  /* 增加最大高度 */
-  min-height: 600px;
-  /* 增加最小高度 */
+  height: 57vh;
+  /* 縮小到視窗高度的 57% (原85%的2/3) */
+  max-height: 600px;
+  /* 縮小最大高度 */
+  min-height: 400px;
+  /* 縮小最小高度 */
   overflow: hidden;
   position: relative;
   border-radius: 0 0 20px 20px;
@@ -81,12 +81,12 @@
 
 .imageWrapper {
   width: 100%;
-  height: 85vh;
-  /* 增加到視窗高度的 85% */
-  max-height: 900px;
-  /* 增加最大高度 */
-  min-height: 600px;
-  /* 增加最小高度 */
+  height: 57vh;
+  /* 縮小到視窗高度的 57% (原85%的2/3) */
+  max-height: 600px;
+  /* 縮小最大高度 */
+  min-height: 400px;
+  /* 縮小最小高度 */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -324,6 +324,217 @@
   padding: 20px;
   background-color: #f8f9fa;
   border-radius: 12px;
+}
+
+/* 選項卡容器 */
+.tabContainer {
+  background: white;
+  margin: 0 16px 16px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tabHeader {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 16px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tabButton.active {
+  color: #007AFF;
+  border-bottom: 2px solid #007AFF;
+  font-weight: 500;
+}
+
+.tabContent {
+  min-height: 200px;
+}
+
+.tabPanel {
+  padding: 16px;
+}
+
+/* 飲食計劃樣式 */
+.loadingContainer {
+  padding: 20px;
+}
+
+.dietPlan {
+  padding: 16px;
+}
+
+.dayPlan {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.dayPlan h3 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 16px;
+}
+
+.mealSuggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mealSuggestions div {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.emptyState {
+  padding: 40px 20px;
+  text-align: center;
+  color: #999;
+}
+
+/* 飲食記錄樣式 */
+.dietRecords {
+  padding: 16px;
+}
+
+.mealSection {
+  margin-bottom: 20px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mealHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+.mealInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mealInfo span:first-child {
+  font-size: 20px;
+}
+
+.mealInfo span:last-child {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.mealTarget {
+  font-size: 12px;
+  color: #666;
+}
+
+.foodList {
+  padding: 16px;
+}
+
+.foodCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.foodImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.foodInfo {
+  flex: 1;
+}
+
+.foodInfo div:first-child {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.foodInfo div:last-child {
+  font-size: 12px;
+  color: #666;
+}
+
+.foodCalories {
+  color: #FF6B35;
+  font-weight: 500;
+}
+
+.deleteButton {
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.globalLoading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.globalLoading p {
+  color: white;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.textInput {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.textInput:focus {
+  outline: none;
+  border-color: #007AFF;
 }
 
 /* 底部操作欄 */

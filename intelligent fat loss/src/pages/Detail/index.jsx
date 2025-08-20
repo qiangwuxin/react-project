@@ -44,6 +44,8 @@ const Detail = () => {
     navigate(-1);
   }, [navigate]);
 
+
+
   useEffect(() => {
     setMounted(true);
 
@@ -71,6 +73,8 @@ const Detail = () => {
       clearDetail();
     };
   }, [id, setDetail, clearDetail]);
+
+
 
   // 如果組件未掛載，不渲染任何內容
   if (!mounted) {
