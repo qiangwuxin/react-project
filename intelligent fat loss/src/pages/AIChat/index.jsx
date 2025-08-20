@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { 
-  Button, 
-  Input, 
+import {
   Loading,
-} from 'react-vant'; 
-import { ChatO, UserO } from '@react-vant/icons';
+} from 'react-vant';
+// 不需要圖標庫，使用文字符號
 import useTitle from '@/hooks/useTitle';
 import { chat } from '@/llm';
 import styles from './aichat.module.css';
@@ -13,91 +11,155 @@ const AIChat = () => {
   const [text, setText] = useState('');
   const [isSending, setIsSending] = useState(false);
   const chatAreaRef = useRef(null);
-  const [error, setError] = useState('');  
+  const [error, setError] = useState('');
+  const errorTimerRef = useRef(null);
+  const mountedRef = useRef(true);
 
   useTitle('AI聊天');
 
   const [message, setMessage] = useState([
-    { id: 2, content: 'hello~', role: 'user' },
-    { id: 1, content: 'hello, I am your assistant~~', role: 'assistant' }
+    { id: 2, content: 'How are you today?', role: 'user', timestamp: new Date() },
+    { id: 1, content: 'Hey. I\'m sorry I did not answer yesterday. You\'re not offended?', role: 'assistant', timestamp: new Date() }
   ]);
+
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+      if (errorTimerRef.current) {
+        clearTimeout(errorTimerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (chatAreaRef.current) {
       chatAreaRef.current.scrollTop = chatAreaRef.current.scrollHeight;
     }
   }, [message]);
-  
+
   const showTempError = (msg) => {
     setError(msg);
-    setTimeout(() => setError(''), 2000); // 2秒后自动清除
+    if (errorTimerRef.current) clearTimeout(errorTimerRef.current);
+    errorTimerRef.current = setTimeout(() => {
+      if (!mountedRef.current) return;
+      setError('');
+    }, 3000);
   };
 
   const handleChat = async () => {
     if (text.trim() === '') {
-      showTempError('内容不能为空'); 
+      showTempError('请输入消息');
       return;
     }
 
     setIsSending(true);
     const sendText = text;
     setText('');
-    setError(''); 
+    setError('');
 
     setMessage((prev) => [
       ...prev,
-      { id: Date.now(), content: sendText, role: 'user' }
+      { id: Date.now(), content: sendText, role: 'user', timestamp: new Date() }
     ]);
 
     try {
       const newMessage = await chat([{ role: 'user', content: sendText }]);
+      if (!mountedRef.current) return;
       setMessage((prev) => [
         ...prev,
-        { id: Date.now() + 1, ...newMessage.data }
+        { id: Date.now() + 1, ...newMessage.data, timestamp: new Date() }
       ]);
     } catch (error) {
       showTempError('发送失败，请重试');
     } finally {
-      setIsSending(false);
+      if (mountedRef.current) setIsSending(false);
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleChat();
+    }
+  };
+
+  const formatDate = (date) => {
+    const today = new Date();
+    const messageDate = new Date(date);
+
+    if (messageDate.toDateString() === today.toDateString()) {
+      return 'TODAY';
+    }
+    return messageDate.toLocaleDateString();
+  };
+
+  const shouldShowDateSeparator = (currentIndex) => {
+    if (currentIndex === 0) return true;
+
+    const currentMessage = message[currentIndex];
+    const previousMessage = message[currentIndex - 1];
+
+    const currentDate = new Date(currentMessage.timestamp).toDateString();
+    const previousDate = new Date(previousMessage.timestamp).toDateString();
+
+    return currentDate !== previousDate;
+  };
+
   return (
-    <div className="flex flex-col h-screen">
-      {/* 添加错误提示显示区域 - 固定在顶部 */}
+    <div className={styles.container}>
+      {/* 錯誤提示 */}
       {error && (
-        <div className="fixed top-0 left-0 right-0 bg-red-500 text-white text-center py-2 z-10">
+        <div className={styles.errorMessage}>
           {error}
         </div>
       )}
-      
-      <div ref={chatAreaRef} className={`flex-1 ${styles.chatArea}`}>
-        {message.map((msg) => (
-          <div
-            key={msg.id}
-            className={
-              msg.role === 'user' ? styles.messageRight : styles.messageLeft
-            }
-          >
-            {msg.role === 'assistant' ? <ChatO /> : <UserO />}
-            {msg.content}
+
+      {/* 聊天區域 */}
+      <div ref={chatAreaRef} className={styles.chatArea}>
+        {message.map((msg, index) => (
+          <div key={msg.id}>
+            {shouldShowDateSeparator(index) && (
+              <div className={styles.dateSeparator}>
+                <span>{formatDate(msg.timestamp)}</span>
+              </div>
+            )}
+            <div
+              className={
+                msg.role === 'user' ? styles.messageRight : styles.messageLeft
+              }
+            >
+              {msg.content}
+            </div>
           </div>
         ))}
       </div>
-      
-      <div className={`flex ${styles.inputArea}`}>
-        <Input
+
+      {/* 輸入區域 */}
+      <div className={styles.inputArea}>
+        <input
+          type="text"
           value={text}
-          onChange={(e) => setText(e)}
-          placeholder="请输入消息"
-          className={`flex-1 ${styles.input}`}
+          onChange={(e) => setText(e.target.value)}
+          onKeyPress={handleKeyPress}
+          placeholder="Your message"
+          className={styles.input}
+          disabled={isSending}
         />
-        <Button disabled={isSending} type="primary" onClick={handleChat}>
-          {isSending ? '发送中...' : '发送'}
-        </Button>
+        <button
+          className={styles.sendButton}
+          onClick={handleChat}
+          disabled={isSending || !text.trim()}
+        >
+          <span className={styles.sendIcon}>↗</span>
+        </button>
       </div>
-      
-      {isSending &&  (<div className="fixed-loading"><Loading type="ball"/></div>) }
+
+      {/* 加載指示器 */}
+      {isSending && (
+        <div className={styles.loadingContainer}>
+          <Loading type="ball" />
+        </div>
+      )}
     </div>
   );
 };
