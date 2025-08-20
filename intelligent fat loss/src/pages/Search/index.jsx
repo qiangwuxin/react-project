@@ -6,6 +6,7 @@ import {
 import SearchBox from '@/components/SearchBox'
 import { useSearchStore } from '@/store/useSearch';
 import styles from './search.module.css'
+import useTitle from '@/hooks/useTitle';
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -17,22 +18,8 @@ const Search = () => {
     setHotList
   } = useSearchStore();
 
-  const HotListItems = memo((props) => {
-    // console.log('-------',props);
-    const { hotList } = props;
-    return (
-      <div className={styles.hot}>
-        <h1>热门推荐</h1>
-        {
-          hotList.map((item) => (
-            <div key={item.id} className={styles.item}>
-              {item.city}
-            </div>
-          ))
-        }
-      </div>
-    )
-  })
+  useTitle('搜索');
+
   useEffect(() => {
     setHotList();
   }, [])
@@ -72,7 +59,7 @@ const Search = () => {
             <div className={styles.historyHeader}>
               <h3>搜索历史</h3>
               <button onClick={clearHistory} className={styles.clearHistory}>
-                清空历史
+                🗑️
               </button>
             </div>
             <div className={styles.historyList}>
@@ -89,8 +76,23 @@ const Search = () => {
           </div>
         )}
 
-        {/* 维护性好 */}
-        <HotListItems hotList={hotList} />
+        {/* 热门推荐 */}
+        {query === "" && (
+          <div className={styles.hot}>
+            <h3>你可能感兴趣</h3>
+            <div className={styles.hotList}>
+              {hotList.map((item) => (
+                <div
+                  key={item.id}
+                  className={styles.hotItem}
+                  onClick={() => handleHistoryClick(item.city)}
+                >
+                  {item.city}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className={styles.list} style={suggestListStyle}>
           {

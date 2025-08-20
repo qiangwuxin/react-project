@@ -6,7 +6,7 @@
   bottom: 0;
   z-index: 100;
   overflow: hidden;
-  background: #f2f3f4;
+  background: white;
 }
 
 .list {
@@ -24,20 +24,20 @@
 
 .history {
   background: white;
-  margin: 10px;
-  border-radius: 8px;
-  padding: 16px;
+  margin: 20px;
+  padding: 0;
 }
 
 .historyHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .historyHeader h3 {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
   color: #333;
   margin: 0;
 }
@@ -45,33 +45,100 @@
 .clearHistory {
   background: none;
   border: none;
-  color: #999;
-  font-size: 14px;
+  color: #666;
+  font-size: 16px;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
 }
 
 .clearHistory:hover {
   color: #ff4757;
+  background: #f5f5f5;
 }
 
 .historyList {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 12px;
 }
 
 .historyItem {
   background: #f5f5f5;
-  padding: 6px 12px;
-  border-radius: 16px;
+  padding: 8px 16px;
+  border-radius: 20px;
   font-size: 14px;
-  color: #666;
+  color: #333;
   cursor: pointer;
   transition: all 0.2s;
+  border: none;
+  outline: none;
 }
 
 .historyItem:hover {
   background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+/* 热门推荐样式 */
+.hot {
+  background: white;
+  margin: 20px;
+  padding: 0;
+}
+
+.hot h3 {
+  font-size: 18px;
+  font-weight: bold;
   color: #333;
+  margin: 0 0 16px 0;
+}
+
+.hotList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hotItem {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  outline: none;
+  font-weight: 500;
+}
+
+/* 为不同的热门项目设置不同的背景色 */
+.hotItem:nth-child(1) {
+  background: #ffe6e6;
+}
+
+.hotItem:nth-child(2) {
+  background: #fff2e6;
+}
+
+.hotItem:nth-child(3) {
+  background: #e6ffe6;
+}
+
+.hotItem:nth-child(4) {
+  background: #fff9e6;
+}
+
+.hotItem:nth-child(5) {
+  background: #e6f3ff;
+}
+
+.hotItem:nth-child(6) {
+  background: #f0e6ff;
+}
+
+.hotItem:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
