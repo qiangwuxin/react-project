@@ -1,35 +1,630 @@
-.container {
-  padding-top: 24px;
-  background-color: #f7f8fa;
+/* shop.module.css */
+.shopContainer {
   min-height: 100vh;
-  padding-bottom: 60px;
-  width: 1800px;
-  max-width: 1800px;
-  margin: 0 auto;
-  padding: 0 24px;
-  box-sizing: border-box;
+  background: #f8f9fa;
+  padding-bottom: 70px;
 }
 
-.container>div:first-child {
-  margin-bottom: 24px;
+.shopContainerWithSubmitBar {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding-bottom: 220px;
 }
 
-.search {
+/* 搜索栏 */
+.searchBar {
   padding: 16px;
   background: white;
-  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.search input {
-  width: 100%;
+.menuIcon {
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.menuIcon:hover {
+  background-color: #f5f5f5;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
   padding: 12px 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 20px;
   background: #f5f5f5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  margin: 0 8px;
 }
 
-.search input:focus {
-  outline: none;
-  border-color: #1989fa;
+.searchBox:hover {
+  background: #e8e8e8;
+}
+
+.searchIcon {
+  margin-right: 8px;
+  font-size: 18px;
+  color: #999;
+}
+
+.searchPlaceholder {
+  color: #999;
+  font-size: 16px;
+}
+
+.moreIcon {
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.moreIcon:hover {
+  background-color: #f5f5f5;
+}
+
+/* 主横幅区域 - Swiper轮播 */
+.banner {
+  background: #000;
+  margin-bottom: 16px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.bannerSwiper {
+  height: 100%;
+}
+
+.bannerSwiperItem {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bannerSwiperImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  min-height: 100%;
+  min-width: 100%;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.bannerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.bannerTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+}
+
+.bannerSubtitle {
+  font-size: 16px;
+  margin: 0 0 4px 0;
+  opacity: 0.9;
+}
+
+.bannerText {
+  font-size: 14px;
+  margin: 0 0 4px 0;
+  opacity: 0.8;
+}
+
+.bannerEnglish {
+  font-size: 12px;
+  margin: 0;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* 分类图标区域 */
+.categories {
+  background: white;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  margin: 0 16px 16px 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.categoryDots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+.dotActive {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.categoryIcons {
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.categoryItem:hover {
+  transform: translateY(-2px);
+}
+
+.categoryIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.categoryItem span {
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+  font-weight: 500;
+}
+
+
+
+/* 今日新品区域 */
+.newProducts {
+  padding: 0 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.moreButton {
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.moreButton:hover {
+  background: #ff3742;
+  transform: translateY(-1px);
+}
+
+.waterfallContainer {
+  width: 100%;
+}
+
+/* 购物车样式 */
+.submitBar {
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+}
+
+/* 自定义提交栏样式 */
+.customSubmitBar {
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid #f0f0f0;
+}
+
+.submitBarLeft {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.submitBarLeft:hover {
+  background-color: #f5f5f5;
+}
+
+.selectedCount {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.arrowIcon {
+  font-size: 12px;
+  color: #999;
+  transition: transform 0.2s ease;
+}
+
+.submitBarLeft:hover .arrowIcon {
+  transform: rotate(180deg);
+}
+
+.submitBarRight {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.totalLabel {
+  font-size: 14px;
+  color: #333;
+}
+
+.totalPrice {
+  font-size: 16px;
+  color: #ff4757;
+  font-weight: bold;
+}
+
+.checkoutButton {
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.checkoutButton:hover {
+  background: #ff3742;
+}
+
+/* 详情弹窗样式 */
+.detailActionSheet {
+  --rv-action-sheet-max-height: 70vh;
+}
+
+/* 隱藏ActionSheet默認的關閉按鈕 */
+:global(.rv-action-sheet__close-icon) {
+  display: none !important;
+}
+
+:global(.rv-action-sheet__header) {
+  position: relative !important;
+}
+
+:global(.rv-action-sheet__header .rv-icon) {
+  display: none !important;
+}
+
+:global(.rv-action-sheet) .modalHeader {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 16px !important;
+  background: white !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.modalContent {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: white;
+}
+
+.modalTitle {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+}
+
+.closeButton {
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: #e9ecef;
+}
+
+.clearButton {
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.clearButton:hover {
+  background-color: #e9ecef;
+}
+
+.modalTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.closeButton {
+  font-size: 18px;
+  color: #999;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: #e9ecef;
+}
+
+.modalBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.modalProductItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modalProductItem:last-child {
+  border-bottom: none;
+}
+
+.productImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.productTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.productDesc {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.productPrice {
+  font-size: 14px;
+  color: #ff4757;
+  font-weight: 500;
+}
+
+.productControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.quantityBtn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.quantityBtn:hover {
+  border-color: #ff4757;
+  color: #ff4757;
+}
+
+.quantityText {
+  min-width: 24px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* 模态框底部样式 */
+.modalFooter {
+  border-top: 1px solid #f0f0f0;
+  background: white;
+  padding: 16px;
+  position: sticky;
+  bottom: 0;
+}
+
+.footerSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.footerCount {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footerTotal {
+  font-size: 16px;
+  color: #333;
+}
+
+.footerTotal .footerPrice {
+  color: #ff4757;
+  font-weight: bold;
+}
+
+.footerCheckoutButton {
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.footerCheckoutButton:hover {
+  background: #ff3742;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .bannerContent {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .bannerLeft,
+  .bannerRight {
+    flex: none;
+  }
+
+  .categoryIcons {
+    gap: 8px;
+  }
+
+  .categoryIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .banner {
+    height: 150px;
+  }
+}
+
+@media (min-width: 768px) {
+  .banner {
+    height: 250px;
+  }
 }
