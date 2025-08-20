@@ -29,7 +29,7 @@ const Diet = () => {
         navigate('/diet/arrangement');
       }
     } catch (error) {
-      console.error('標籤切換錯誤:', error);
+      console.error('标签切换错误:', error);
     }
   };
 
@@ -41,7 +41,7 @@ const Diet = () => {
           className={`${styles.tabButton} ${activeTab === 'plan' ? styles.active : ''}`}
           onClick={() => handleTabChange('plan')}
         >
-          <span className={styles.tabText}>用戶信息</span>
+          <span className={styles.tabText}>用户信息</span>
         </button>
         <button
           className={`${styles.tabButton} ${activeTab === 'arrangement' ? styles.active : ''}`}
