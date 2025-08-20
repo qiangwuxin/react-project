@@ -1,0 +1,504 @@
+/* dietArrangement.module.css - 饮食安排页面样式 */
+.container {
+  padding: 16px;
+  padding-bottom: 120px;
+  background: #f8f9fa;
+  min-height: 100vh;
+  height: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-y: visible;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 搜索和分類區域 */
+.searchSection {
+  margin-bottom: 20px;
+}
+
+.searchBar {
+  position: relative;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  background: #f0f0f0;
+  border-radius: 25px;
+  padding: 14px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.searchBar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.searchIcon {
+  font-size: 20px;
+  color: #6c757d;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: color 0.2s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.searchIcon:hover {
+  color: #495057;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  pointer-events: none;
+  color: #495057;
+  font-weight: 400;
+}
+
+.searchInput::placeholder {
+  color: #999;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 10px;
+  background: white;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+}
+
+.categoryItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.categoryIcon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.categoryName {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.categoryEnglish {
+  font-size: 13px;
+  color: #666;
+  font-weight: 400;
+}
+
+.dateIndicator {
+  text-align: right;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* 飲食記錄分析區域 */
+.dietAnalysisSection {
+  margin-bottom: 20px;
+}
+
+.analysisTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mealCards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mealCard {
+  border-radius: 16px;
+  padding: 18px;
+  background: white;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: auto;
+  min-height: 110px;
+  overflow: visible;
+  border: 1px solid #f0f0f0;
+  margin-bottom: 12px;
+}
+
+.mealCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.mealCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.mealCardIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+  margin-right: 14px;
+  background: #4A90E2;
+}
+
+.mealCardInfo {
+  flex: 1;
+}
+
+.mealCardName {
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.mealCardCalories {
+  font-size: 13px;
+  color: #666;
+  font-weight: 400;
+}
+
+.addButton {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #4A90E2;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.addButton:hover {
+  background: #357ABD;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+/* 餐點食物列表 */
+.mealFoodsList {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 12px;
+  height: auto;
+  overflow: visible;
+}
+
+.foodListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+  margin-bottom: 10px;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  background: #f8f9fa;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  gap: 14px;
+  transition: all 0.3s ease;
+}
+
+.foodListItem:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.foodImageContainer {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.foodImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.foodListInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.foodListName {
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.foodListCalories {
+  font-size: 13px;
+  color: #4A90E2;
+  font-weight: 600;
+}
+
+.deleteButton {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: #ff4757;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(255, 71, 87, 0.3);
+}
+
+.deleteButton:hover {
+  background: #e63946;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(255, 71, 87, 0.4);
+}
+
+.mealTotal {
+  text-align: right;
+  font-size: 15px;
+  color: #333;
+  font-weight: 700;
+  margin-top: 12px;
+  padding: 12px;
+  border-top: 2px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+}
+
+.overLimit {
+  color: #ff4757;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255, 71, 87, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+/* 模態框樣式 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.modalTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333 !important;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  color: #333 !important;
+  background: white !important;
+}
+
+.modalInput:focus {
+  border-color: #FF9500;
+}
+
+.modalInput::placeholder {
+  color: #999 !important;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.uploadButton {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.uploadButton:hover {
+  background: #f5f5f5;
+}
+
+.confirmButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #007AFF;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirmButton:hover {
+  background: #0056CC;
+}
+
+.cancelButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #007AFF;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancelButton:hover {
+  background: #0056CC;
+}
+
+/* 圖片上傳區域 */
+.imageUpload {
+  margin-bottom: 16px;
+}
+
+.fileInput {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  color: #333 !important;
+}
+
+.fileInput:hover {
+  border-color: #FF9500;
+}
+
+.analyzing {
+  text-align: center;
+  padding: 16px;
+}
+
+.analyzing p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* 響應式設計 */
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+    padding-bottom: 140px;
+  }
+
+  .categoriesGrid {
+    gap: 8px;
+  }
+
+  .categoryItem {
+    padding: 8px 4px;
+  }
+
+  .categoryIcon {
+    font-size: 20px;
+  }
+
+  .categoryName {
+    font-size: 11px;
+  }
+
+  .categoryEnglish {
+    font-size: 9px;
+  }
+
+  .modalContent {
+    margin: 20px;
+    max-width: none;
+  }
+
+  .mealCard {
+    min-height: 100px;
+  }
+}

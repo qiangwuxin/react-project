@@ -7,6 +7,8 @@ const instance = axios.create({
 
 // 请求拦截器
 instance.interceptors.request.use(config => {
+  console.log('Request interceptor - URL:', config.baseURL + config.url); // 調試日誌
+  console.log('Request interceptor - data:', config.data); // 調試日誌
   const token = localStorage.getItem('token') || '';
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

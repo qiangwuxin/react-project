@@ -32,6 +32,7 @@ import {
 import styles from './account.module.css';
 
 const Account = () => {
+    console.log('Account page rendering...'); // 調試日志
     const fileInputRef = useRef(null);
 
     const uploadImgData = (e) => {
@@ -69,14 +70,17 @@ const Account = () => {
         { icon: <UserO />, text: '我的' }
     ];
 
+    const [showActionSheet, setShowActionSheet] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useTitle('我的');
+
     const [userInfo, setUserInfo] = useState({
         nickname: '小猫',
-        level: '5级',
-        slogan: '保持热爱，奔赴山海。',
+        level: '3级',
+        slogan: 'Study hard, work hard, and be a good person.',
         avatar: 'https://www.shuomingshu.cn/wp-content/uploads/images/2023/03/12/RZvQpXSBzZ9TXi_gy3r1n1r0r2.jpg'
-    })
-    useTitle("我的")
-    const [showActionSheet, setShowActionSheet] = useState(false);
+    });
     const handleAction = async (e) => {
         console.log(e);
         if (e.type === 1) {

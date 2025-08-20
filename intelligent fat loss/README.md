@@ -1,12 +1,20 @@
-# React + Vite
+## 智减
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+主要功能：
+- 商城页面实现购物
+- 饮食页面 
+  根据自己的身体数据，AI给你每餐饭的建议热量
+  可以通过上传照片或者文本知道自己这餐产生了多少热量
+- AIChat 页面，可以通过和AI的交流了解更多关于减脂的信息和计划
 
-Currently, two official plugins are available:
+主要页面/组件：
+shop
+search
+detail
+dietarrangement
+bodyData
+AIChat
+Toast(组件)
+RequireAuth（组件）
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

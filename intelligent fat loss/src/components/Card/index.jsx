@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './card.module.css'
 
 const Card = forwardRef((props, ref) => {
@@ -10,12 +11,23 @@ const Card = forwardRef((props, ref) => {
     price,
     desc,
     onBuyNow,
+    addCartNum,
   } = props;
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    window.location.href = `/detail/${id}`;
+    try {
+      navigate(`/detail/${id}`);
+    } catch (error) {
+      console.error('商品详情导航错误:', error);
+    }
   };
 
+  const handleAddCart = (e) => {
+    e.stopPropagation();
+    console.log('handleAddCart called');
+    addCartNum && addCartNum();
+  }
   const handleBuyNow = (e) => {
     e.stopPropagation(); // 阻止事件冒泡，避免觸發卡片的點擊事件
     onBuyNow && onBuyNow({
@@ -45,8 +57,10 @@ const Card = forwardRef((props, ref) => {
       <div className={styles.content}>
         <div className={styles.title}>{title}</div>
         <div className={styles.price}>¥{price}</div>
-        <div className={styles.desc}>{desc}</div>
-        <button className={styles.Btn} onClick={handleBuyNow}>立即购买</button>
+        <div className={styles.buttonContainer}>
+          <button className={styles.Btn} onClick={handleBuyNow}>立即购买</button>
+          <button className={styles.Btn} onClick={handleAddCart}>加入购物车</button>
+        </div>
       </div>
     </div>
   );

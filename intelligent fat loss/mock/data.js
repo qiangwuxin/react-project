@@ -4,38 +4,43 @@ import Mock from 'mockjs'
 const secret = '!&124coddefgg';
 
 const getCards = (page, pageSize = 10) => {
+  const cardHeight = Mock.Random.integer(300, 320);
+  const imageHeight = Math.round(cardHeight * 0.85);
   return Array.from({ length: pageSize }, (_, i) => ({
     id: `${page}-${i}`,
     title: Mock.Random.ctitle(4, 8),
     price: Mock.Random.integer(20, 200),
     desc: Mock.Random.csentence(8, 16),
     // 提供更准确的高度范围（380-580）
-    height: Mock.Random.integer(200, 350),
-    url: Mock.Random.image('100x150', Mock.Random.color(), "#fff", 'png')
+    height: cardHeight,
+    url: Mock.Random.image(`100x${imageHeight}`, Mock.Random.color(), "#fff", 'png')
   }))
 }
+
 //login 模块 mock 
 export default [
   {
     url: '/api/login',
     method: 'post',
     timeout: 2000,//请求耗时
-    response: (req, res) => {
+    response: ({ body }) => {
       //req username,password
-      const { username, password, bodyData } = req.body;
+      const { username, password } = body;
+      console.log('Mock login attempt:', { username, password }); // 添加調試日誌
       if (username !== 'admin' || password !== '123456') {
+        console.log('Login failed: invalid credentials'); // 添加調試日誌
         return {
           code: 1,
           message: '用户名或密码错误'
         }
       }
+      console.log('Login successful'); // 添加調試日誌
       //生成token 颁发令牌
       //json 用户数据
       const token = jwt.sign({
         user: {
           id: "001",
           username,
-          ...bodyData,
         }
       }, secret, {
         expiresIn: 86400
@@ -46,7 +51,6 @@ export default [
         data: {
           id: "001",
           username,
-          bodyData,
         }
       }
     }
@@ -54,8 +58,8 @@ export default [
     url: '/api/pages',
     method: 'get',
     timeout: 1000,
-    response: (req, res) => {
-      const page = req.query.page || 1;
+    response: ({ query }) => {
+      const page = query.page || 1;
       const pageSize = 10; // 每页10条
       const cards = getCards(page, pageSize); // 调用getCards生成卡片数组
       return {
@@ -67,7 +71,7 @@ export default [
     url: '/api/detail/:id',  // 添加前导斜杠
     method: 'get',
     timeout: 1000,
-    response: (req, res) => {
+    response: () => {
       const randomData = Mock.mock({
         title: '@ctitle(5, 10)',
         price: '@integer(60, 100)',
@@ -98,9 +102,9 @@ export default [
     url: '/api/search',
     method: 'get',
     timeout: 1000,
-    response: (req, res) => {
+    response: ({ query }) => {
       // ?keyword=释小龙
-      const keyword = req.query.keyword;
+      const keyword = query.keyword;
       let num = Math.floor(Math.random() * 10);
       let list = [];
       for (let i = 0; i < num; i++) {
@@ -122,7 +126,7 @@ export default [
     url: '/api/hotlist',
     method: 'get',
     timeout: 1000,
-    response: (req, res) => {
+    response: () => {
       return {
         code: 0,
         data: [{
@@ -143,5 +147,4 @@ export default [
       }
     }
   },
-
 ]

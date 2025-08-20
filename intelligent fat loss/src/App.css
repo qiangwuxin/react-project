@@ -15,51 +15,75 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 確保BodyData頁面的文字不受全局樣式影響 */
+.container[class*="bodyData"] *,
+.container[class*="BodyData"] * {
+  color: inherit !important;
+}
+
 /* 通用样式 */
 .flex {
   display: flex;
 }
+
 .flex-col {
   flex-direction: column;
 }
+
 .flex-1 {
-  flex:1;
+  flex: 1;
 }
+
 .h-screen {
   height: 100vh;
 }
+
 .h-all {
   height: 100%;
 }
-.fixed-loading{
+
+.fixed-loading {
   position: fixed;
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
 }
-.mt2{
+
+.mt2 {
   margin-top: 8px;
 }
-.mt3{
+
+.mt3 {
   margin-top: 16px;
 }
+
 .text-center {
   text-align: center;
 }
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+
 .text-2xl {
   font-size: 1.5rem;
 }
+
 .font-bold {
   font-weight: 700;
 }
+
 .text-gray-600 {
   color: #4b5563;
 }
+
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+/* 為有底部導航欄的頁面添加底部padding，但排除AIChat頁面 */
+.flex-1>div:not([class*="aichat"]):not([class*="AIChat"]) {
+  padding-bottom: 60px;
 }

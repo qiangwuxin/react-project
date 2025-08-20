@@ -1,0 +1,658 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-image: url('https://img95.699pic.com/photo/50029/3064.jpg_wh860.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 0;
+}
+
+/* 页面顶部标题 */
+.pageTitle {
+  text-align: center;
+  margin: 0 0 30px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.pageTitle h2 {
+  font-size: 32px;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+}
+
+/* 表单容器 - 保持透明 */
+.formContainer {
+  background: transparent;
+  border-radius: 20px;
+  padding: 0;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 数据输入区域 - 透明背景 */
+.inputSection {
+  background: transparent;
+  border-radius: 20px;
+  overflow: hidden;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: none;
+  box-shadow: none;
+  width: 100%;
+}
+
+/* 滚动条样式 */
+.inputSection::-webkit-scrollbar {
+  width: 6px;
+}
+
+.inputSection::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.inputSection::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.inputSection::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.inputGroup {
+  background: transparent !important;
+  border: none;
+  color: #ffffff;
+  width: 100%;
+}
+
+/* 表单内容样式 */
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 15px;
+  background: transparent;
+  border-radius: 12px;
+  border: none;
+}
+
+.radioGroup label {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.radioOptions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.radioOptions>div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.radioOptions>div:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.submitButton {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.submitButton button {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(46, 125, 50, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.submitButton button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.5);
+  background: linear-gradient(135deg, rgba(76, 175, 80, 1), rgba(46, 125, 50, 1));
+}
+
+/* 关键修复：单选框样式 - 強力點擊修復 */
+.van-radio {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.van-radio__icon {
+  background-color: white !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 11 !important;
+}
+
+.van-radio__icon--checked {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+}
+
+.van-radio__icon--checked::after {
+  background-color: white !important;
+  content: '' !important;
+  display: block !important;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.van-radio__label {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* 確保整個radio選項區域都可點擊 */
+.radioOptions>div {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 9 !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.radioOptions>div:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 最強力的radio樣式覆蓋 - 針對react-vant的實際DOM結構 */
+.radioOptions .van-radio {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* 隱藏原始的radio圖標 */
+.radioOptions .van-radio__icon {
+  display: none !important;
+}
+
+/* 創建新的自定義radio圖標 */
+.radioOptions .van-radio::before {
+  content: '' !important;
+  display: inline-block !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 50% !important;
+  background-color: white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  flex-shrink: 0 !important;
+}
+
+/* 選中狀態 - 使用checked屬性選擇器 */
+.radioOptions .van-radio[data-checked="true"]::before,
+.radioOptions .van-radio[aria-checked="true"]::before,
+.radioOptions .van-radio--checked::before {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+  border-width: 3px !important;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.5) !important;
+}
+
+/* 選中狀態的內部圓點 */
+.radioOptions .van-radio[data-checked="true"]::after,
+.radioOptions .van-radio[aria-checked="true"]::after,
+.radioOptions .van-radio--checked::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 6px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 8px !important;
+  height: 8px !important;
+  background-color: white !important;
+  border-radius: 50% !important;
+  z-index: 11 !important;
+}
+
+/* 調整文字位置 */
+.radioOptions .van-radio__label {
+  margin-left: 0 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 選中狀態的文字樣式 */
+.radioOptions .van-radio[data-checked="true"] .van-radio__label,
+.radioOptions .van-radio[aria-checked="true"] .van-radio__label,
+.radioOptions .van-radio--checked .van-radio__label {
+  color: #4CAF50 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.5) !important;
+}
+
+/* 自定義Radio組件樣式 */
+.customRadio {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  background: transparent !important;
+}
+
+.customRadio:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.radioIcon {
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 50% !important;
+  background-color: white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.customRadio.checked .radioIcon {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+  border-width: 3px !important;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.5) !important;
+}
+
+.customRadio.checked .radioIcon::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 8px !important;
+  height: 8px !important;
+  background-color: white !important;
+  border-radius: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.radioLabel {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+  transition: all 0.2s ease !important;
+}
+
+.customRadio.checked .radioLabel {
+  color: #4CAF50 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.5) !important;
+}
+
+/* 強制所有可能的覆蓋元素不阻擋點擊 */
+.container * {
+  pointer-events: auto !important;
+}
+
+/* 但確保背景圖片不阻擋點擊 */
+.container::before {
+  pointer-events: none !important;
+}
+
+/* 強化radio選中狀態的視覺效果 */
+.van-radio--checked .van-radio__icon {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+  border-width: 2px !important;
+}
+
+.van-radio--checked .van-radio__label {
+  color: #4CAF50 !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.5) !important;
+}
+
+/* 覆蓋react-vant的默認樣式 */
+.van-radio {
+  --van-radio-checked-icon-color: #4CAF50 !important;
+  --van-radio-icon-size: 20px !important;
+}
+
+/* 最強力的radio樣式覆蓋 - 針對所有可能的類名 */
+.radioOptions .van-radio__icon,
+.radioOptions [class*="van-radio__icon"],
+.radioOptions input[type="radio"]+label::before,
+.radioOptions .van-radio .van-radio__icon {
+  position: relative !important;
+  display: inline-block !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 50% !important;
+  background-color: white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.radioOptions .van-radio--checked .van-radio__icon,
+.radioOptions .van-radio[aria-checked="true"] .van-radio__icon,
+.radioOptions .van-radio__icon--checked,
+.radioOptions [class*="van-radio__icon--checked"],
+.radioOptions input[type="radio"]:checked+label::before {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+  border-width: 3px !important;
+  position: relative !important;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.5) !important;
+}
+
+.radioOptions .van-radio--checked .van-radio__icon::after,
+.radioOptions .van-radio[aria-checked="true"] .van-radio__icon::after,
+.radioOptions .van-radio__icon--checked::after,
+.radioOptions [class*="van-radio__icon--checked"]::after,
+.radioOptions input[type="radio"]:checked+label::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 8px !important;
+  height: 8px !important;
+  background-color: white !important;
+  border-radius: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  display: block !important;
+}
+
+/* 输入字段样式 - 透明背景 */
+.van-cell {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.van-field__label {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.van-field__control {
+  color: #ffffff !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 8px 0 !important;
+  border: none !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+}
+
+.van-field__control::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.van-field__error-message {
+  color: #ff6b6b !important;
+  font-size: 13px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.van-cell-group {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 移除所有全局透明设置 */
+.container * {
+  background-color: initial !important;
+}
+
+/* 确保输入字段透明 */
+.van-field,
+.van-field__body,
+.van-field__control,
+.van-field__control[type="number"],
+.van-field__control[type="text"],
+input {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* 強制所有文字為白色 - 最高優先級 */
+.container,
+.container *,
+.container label,
+.container span,
+.container div,
+.container p,
+.container h1,
+.container h2,
+.container h3,
+.container h4,
+.container h5,
+.container h6,
+.container input,
+.container textarea,
+.container select,
+.container option,
+.container button,
+.container a,
+.container li,
+.container td,
+.container th {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 特別針對標題 - 保持黑色 */
+.pageTitle h2 {
+  color: #000000 !important;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 針對輸入框的文字 */
+.van-field__control,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea {
+  color: #ffffff !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 8px 0 !important;
+}
+
+/* 針對placeholder文字 */
+.van-field__control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* 針對標籤文字 */
+.van-field__label,
+label,
+.radioLabel {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 針對數字輸入框 */
+input[type="number"] {
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+/* 針對所有可能的文字元素 */
+.container *:not(.pageTitle h2) {
+  color: #ffffff !important;
+}
+
+/* 最強制的白色文字覆蓋 - 針對所有可能的選擇器 */
+.container,
+.container *,
+.container>*,
+.container>*>*,
+.container>*>*>*,
+.container>*>*>*>*,
+.container>*>*>*>*>* {
+  color: #ffffff !important;
+}
+
+/* 特別針對BodyData頁面的所有元素 */
+body .container,
+body .container *,
+body .container>*,
+body .container>*>* {
+  color: #ffffff !important;
+}
+
+/* 覆蓋任何可能的全局樣式 */
+.container * {
+  color: #ffffff !important;
+}
+
+/* 確保輸入框文字為白色 */
+.container input,
+.container input[type="text"],
+.container input[type="number"],
+.container input[type="email"],
+.container input[type="password"],
+.container textarea,
+.container select {
+  color: #ffffff !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 8px 0 !important;
+  outline: none !important;
+}
+
+/* 輸入框焦點狀態 */
+.container input:focus,
+.container input[type="text"]:focus,
+.container input[type="number"]:focus,
+.container input[type="email"]:focus,
+.container input[type="password"]:focus,
+.container textarea:focus,
+.container select:focus,
+.van-field__control:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 確保標籤文字為白色 */
+.container label,
+.container .van-field__label,
+.container span,
+.container div {
+  color: #ffffff !important;
+}
+
+/* 只有標題保持黑色 */
+.pageTitle h2 {
+  color: #000000 !important;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.8) !important;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .pageTitle {
+    margin: 0 0 20px 0;
+  }
+
+  .pageTitle h2 {
+    font-size: 24px;
+  }
+
+  .formContainer {
+    width: 95%;
+    max-width: 100%;
+  }
+
+  .inputSection {
+    max-height: 60vh;
+    padding: 15px;
+  }
+
+  .radioOptions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .radioGroup {
+    padding: 12px;
+  }
+}

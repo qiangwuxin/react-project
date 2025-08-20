@@ -1,46 +1,130 @@
 .wrapper {
   display: flex;
   align-items: center;
-  padding: 0 40px 0 12px;
+  padding: 0 20px;
   height: 80px;
-  background: #eee;
+  background: white;
+  gap: 12px;
 }
 
 .ipt {
   flex: 1;
-  margin: 0 5px;
-  line-height: 36px;
-  background: #eee;
+  height: 44px;
+  background: white;
   color: #333;
-  font-size: 28px;
+  font-size: 16px;
   outline: none;
-  border: none;
-  /*原生的input有点难看*/
-  border-bottom: 1px solid #e4e4e4;
+  border: 2px solid #666;
+  border-radius: 22px;
+  padding: 0 16px;
+  transition: all 0.2s;
 }
 
-.box:placeholder {
-  color: #1f1f1f;
+.ipt:focus {
+  border-color: #333;
+  box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.1);
 }
+
+.ipt::placeholder {
+  color: #999;
+}
+
+
 
 .searchIcon {
-  font-size: 24px;
-  color: #666;
+  font-size: 46px !important;
+  color: #333 !important;
   cursor: pointer;
-  margin-left: 8px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.searchIcon svg {
+  color: #333 !important;
+  fill: #333 !important;
+  width: 46px !important;
+  height: 46px !important;
 }
 
 .clearIcon {
-  font-size: 20px;
-  color: #999;
+  font-size: 44px !important;
+  color: #333 !important;
   cursor: pointer;
-  margin-left: 8px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.clearIcon svg {
+  color: #333 !important;
+  fill: #333 !important;
+  width: 44px !important;
+  height: 44px !important;
 }
 
 .searchIcon:hover {
-  color: #1989fa;
+  color: #000 !important;
+  background: #f5f5f5;
+}
+
+.searchIcon:hover svg {
+  color: #000 !important;
+  fill: #000 !important;
 }
 
 .clearIcon:hover {
-  color: #ff4757;
+  color: #ff4757 !important;
+  background: #f5f5f5;
+}
+
+.clearIcon:hover svg {
+  color: #ff4757 !important;
+  fill: #ff4757 !important;
+}
+
+.backIcon {
+  font-size: 48px !important;
+  color: #333 !important;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.backIcon svg {
+  color: #333 !important;
+  fill: #333 !important;
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.backIcon:hover {
+  color: #000 !important;
+  background: #f5f5f5;
+}
+
+.backIcon:hover svg {
+  color: #000 !important;
+  fill: #000 !important;
+}
+
+/* 全局覆蓋 React-Vant 圖標樣式 */
+:global(.rv-icon) {
+  color: #333 !important;
+}
+
+:global(.rv-icon svg) {
+  color: #333 !important;
+  fill: #333 !important;
+}
+
+/* 針對SearchBox內的圖標 */
+.wrapper :global(.rv-icon) {
+  color: #333 !important;
+}
+
+.wrapper :global(.rv-icon svg) {
+  color: #333 !important;
+  fill: #333 !important;
 }

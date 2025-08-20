@@ -59,12 +59,16 @@ const SearchBox = (props) => {
 
   return (
     <div className={styles.wrapper}>
-      <ArrowLeft onClick={() => history.go(-1)} />
+      <ArrowLeft
+        className={styles.backIcon}
+        onClick={() => history.go(-1)}
+        style={{ color: '#333', fontSize: '48px' }}
+      />
       <input
         type="text"
         value={query}
         className={styles.ipt}
-        placeholder='搜索旅游相关'
+        placeholder='Search'
         ref={queryRef}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
@@ -73,13 +77,21 @@ const SearchBox = (props) => {
       <Search
         className={styles.searchIcon}
         onClick={handleSearch}
-        style={displayStyle}
+        style={{
+          ...displayStyle,
+          color: '#333',
+          fontSize: '46px'
+        }}
       />
       {/* 清空按钮 */}
       <Close
         className={styles.clearIcon}
         onClick={clearQuery}
-        style={displayStyle}
+        style={{
+          ...displayStyle,
+          color: '#333',
+          fontSize: '44px'
+        }}
       />
     </div>
   )

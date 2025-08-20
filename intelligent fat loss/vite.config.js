@@ -13,6 +13,9 @@ export default defineConfig({
       mockPath: 'mock',
       localEnable: true,
       prodEnable: true,
+      supportTs: false,
+      logger: true,
+      watchFiles: true,
     }),
   ],
   resolve: {
@@ -25,11 +28,18 @@ export default defineConfig({
     hmr: true,
     watch: {
       usePolling: false
-    }
+    },
+    proxy: {
+      '/arkapi': {
+        target: 'https://ark.cn-beijing.volces.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/arkapi/, ''),
+      },
+    },
   },
   // 啟用優化
   build: {
     minify: true,
     sourcemap: false
-  }
+  },
 })
